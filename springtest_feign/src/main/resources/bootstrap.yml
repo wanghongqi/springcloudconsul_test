@@ -1,0 +1,16 @@
+
+spring:
+  application:
+    name: springtest-feign
+  cloud:
+    consul:
+      host: 192.168.140.128
+      port: 8500
+      discovery:
+        instance-id: ${spring.application.name}:${server.port}
+        service-name: ${spring.application.name}
+    config:
+      discovery:
+        enabled: true
+        service-id: springcloud-config-server
+      fail-fast: true

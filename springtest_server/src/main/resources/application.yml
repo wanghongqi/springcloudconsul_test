@@ -1,0 +1,20 @@
+
+server:
+  port: 9201
+
+spring:
+  application:
+    name: springtest-service
+  cloud:
+    consul:
+      host: 192.168.140.128
+      port: 8500
+      discovery:
+        register: true
+        hostname: 10.1.69.72
+        serviceName: ${spring.application.name}
+        port: ${server.port}
+        healthCheckPath: /home
+        healthCheckInterval: 15s
+        tags: urlprefix-/${spring.application.name}
+        instanceId: ${spring.application.name}
