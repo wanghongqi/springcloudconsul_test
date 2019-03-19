@@ -104,11 +104,6 @@
         </dependency>
 
 
-        <dependency>
-            <groupId>com.glodon</groupId>
-            <artifactId>util</artifactId>
-            <version>1.0.5</version>
-        </dependency>
     </dependencies>
     <build>
         <plugins>
