@@ -1,0 +1,27 @@
+
+server:
+  port: 9201
+
+spring:
+  application:
+    name: springtest-service
+  profiles:
+    active: dev
+  cloud:
+    consul:
+      host: 10.129.63.40
+      port: 9001
+      discovery:
+        register: true
+        instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${server.port}
+        service-name: ${spring.application.name}
+        port: 9201
+        healthCheckPath: /actuator/health
+        healthCheckInterval: 15s
+      config:
+        enabled: true
+        format: YAML
+        prefix: config
+        defaultContext: application
+        profileSeparator: ','
+        data-key: data

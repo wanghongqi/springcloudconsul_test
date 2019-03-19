@@ -1,8 +1,10 @@
 package com.whq.springtest_server;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +17,11 @@ public class SpringtestServerApplication {
 
     @Autowired
     private DiscoveryClient discoveryClient;
+
+    @Value("${test.testValue}")
+    private String testValue;
+    @Autowired
+    private TestConfig  testConfig;
 
     public static void main(String[] args) {
         SpringApplication.run(SpringtestServerApplication.class, args);
@@ -34,6 +41,6 @@ public class SpringtestServerApplication {
     }
     @RequestMapping("/test")
     public String test(String id) {
-        return "test"+id;
+        return "test"+id+"/"+testValue+"/"+testConfig.getTestValue();
     }
 }
