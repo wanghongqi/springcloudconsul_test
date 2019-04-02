@@ -5,9 +5,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
+import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 @EnableDiscoveryClient
 @RestController
@@ -21,6 +24,15 @@ public class SpringtestClientApplication {
 
     @Autowired
     private DiscoveryClient discoveryClient;
+
+    @Autowired
+    RestTemplate restTemplate;
+
+    @Bean
+    @LoadBalanced
+    public RestTemplate restTemplate(){
+        return new RestTemplate();
+    }
 
     /**
      * 从所有服务中选择一个服务（轮询）
@@ -36,5 +48,11 @@ public class SpringtestClientApplication {
     @RequestMapping("/services")
     public Object services() {
         return discoveryClient.getInstances("springtest-service");
+    }
+
+    @RequestMapping("test")
+    public String test(){
+        String result= restTemplate.getForEntity("http://springtest-service/home",String.class).getBody();
+        return result;
     }
 }

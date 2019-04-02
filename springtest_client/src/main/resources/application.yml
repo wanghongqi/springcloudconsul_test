@@ -7,7 +7,7 @@ spring:
     name: springtest-client
   cloud:
     consul:
-      host: 192.168.140.128
-      port: 8500
+      host: 10.129.63.40
+      port: 9001
       discovery:
         register: false
