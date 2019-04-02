@@ -26,10 +26,12 @@ spring:
         fail-fast: true
     gateway:
       routes:
-      - id: gzzjy-map
-        uri: lb://gzzjy-map
+      - id: testservice
+        uri: lb://springtest-service
         predicates:
-        - Path=/api/map/**
+        - Path=/test/**
+        filters:
+        - RewritePath=/test/(?<segment>.*), /$\{segment}
 
 server:
   port: 12010
