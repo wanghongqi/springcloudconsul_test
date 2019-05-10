@@ -9,8 +9,8 @@ spring:
     active: dev
   cloud:
     consul:
-      host: 10.129.63.40
-      port: 9001
+      host: 10.0.197.189
+      port: 8500
       discovery:
         register: true
         instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${server.port}
